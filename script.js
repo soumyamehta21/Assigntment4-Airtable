@@ -165,9 +165,9 @@ async function updateindb(e){
     const country = document.getElementById('country1');
     const phone = document.getElementById('phone1');
     const email = document.getElementById('email1');
-    console.log(keys[clicked-1]);
+    console.log(clicked);
     e.preventDefault();
-    let response = await fetch('https://api.airtable.com/v0/appyEg2T3hHOc2gAN/Table%201'/clicked ,{
+    let response = await fetch(`https://api.airtable.com/v0/appyEg2T3hHOc2gAN/Table%201/${clicked}`,{
         method: 'PATCH',
         headers: {
             "Authorization": "Bearer keynhmixDus3wfxoL",
@@ -183,5 +183,7 @@ async function updateindb(e){
             }
         })
     }).then(res => res.json()).then(data => console.log(data));
+    container7.style.display = 'none';
+    mainmain.style.opacity = "1";
 }
 
