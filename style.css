@@ -96,6 +96,7 @@ input{
 }
 
 #signupform{
+    /* position: absolute; */
     border: 1px solid white;
     border-radius: 15px;
     box-shadow: 0px 0px 18px 8px #888888;
@@ -186,9 +187,10 @@ input{
     flex-direction: column;
     width: 86vw;
     background-color: rgb(220, 220, 220);
-    border: 1px solid white;
+    border: none;
     border-radius: 50px;
     height: 99vh;
+    /* overflow-y: scroll; */
 }
 
 #user{
@@ -215,7 +217,7 @@ input{
     padding: 15px;
     margin: 15px 40px;
     background-color: white;
-    height: 800px;
+    overflow-y: scroll;
 }
 
 #butn{
@@ -280,5 +282,154 @@ td{
 }
 
 .btn:hover{
+    background-color: white;
+}
+
+#container6{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+#popupform{
+    width: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 15px;
+    box-shadow: 0px 0px 18px 8px #888888;
+}
+
+#popupform p{
+    align-self: flex-start;
+    margin: 15px 160px;
+    font-size: 25px;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+}
+
+#fontas{
+    align-self: flex-end;
+    margin: 15px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+#popupform label{
+    margin: 10px;
+}
+
+#popupform input{
+    font-size: 16px;
+    padding: 5px;
+    margin: 5px;
+    height: 30px;
+}
+
+.cont{
+    margin: 25px;
+    align-self: flex-end;
+}
+
+.addagencybtn{
+    width: 65px;
+    height: 35px;
+    border: none;
+    /* border: 1px solid black; */
+    border-radius: 5px;
+    margin: 10px;
+    font-size: 16px;
+}
+
+
+#cancel{
+    align-self: flex-start;
+    cursor: pointer;
+    background-color: #EDF2F7;
+}
+
+#save{
+    align-self: flex-end;
+    color: white;
+    background-color: #40189D;
+    cursor: pointer;
+}
+
+#cancel:hover{
+    background-color: white;
+}
+
+#save:hover{
+    color: #40189D;
+    background-color: white;
+}
+
+#container7{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+#popupform1{
+    width: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 15px;
+    box-shadow: 0px 0px 18px 8px #888888;
+}
+
+#popupform1 label{
+    margin: 10px;
+}
+
+#popupform1 input{
+    font-size: 16px;
+    padding: 5px;
+    margin: 5px;
+    height: 30px;
+}
+
+#popupform1 p{
+    align-self: flex-start;
+    margin: 15px 89px;
+    font-size: 25px;
+    font-weight: bold;
+    border-bottom: 1px solid black;
+}
+
+#update{
+    align-self: flex-end;
+    color: white;
+    background-color: #40189D;
+    cursor: pointer;
+}
+
+#update:hover{
+    color: #40189D;
+    background-color: white;
+}
+
+#cancel1{
+    cursor: pointer;
+    background-color: #EDF2F7;
+}
+
+#cancel1:hover{
     background-color: white;
 }

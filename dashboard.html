@@ -9,7 +9,7 @@
     <script src="https://kit.fontawesome.com/221c2c9d5f.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container3">
+    <div class="container3" id="mainmain">
         <div class="navigation">
             <ul style="list-style: none;">
                 <li><i class="fas fa-home"></i><a href="#">Dashboard</a></li>
@@ -23,7 +23,7 @@
             <div id="user"><i class="fas fa-user"></i>Alexei Murdoch</div>
 
             <div id="incontainer">
-                <button type="button" id="butn">Add Agency</button>
+                <button onclick="myfunc()" type="button" id="butn">Add Agency</button>
 
                 <table id="table" style="width: 100%; margin: 15px;">
                     <tr>
@@ -31,7 +31,7 @@
                         <th>Name  <button class="arrow"><i class="fas fa-arrow-up"></i></button></th>
                         <th>City  <button class="arrow"><i class="fas fa-arrow-up"></i></button></i></th>
                         <th>Country  <button class="arrow"><i class="fas fa-arrow-up"></button></th>
-                        <th>Action <button class="arrow"><i class="fas fa-arrow-up"></i></button></i></th>
+                        <th>Action </th>
                     </tr>
                     <tr>
                         <!-- <td>1</td>
@@ -43,6 +43,49 @@
                 </table>
             </div>
         </div>
+    </div>
+
+    <div id="container6" class="containers1">
+        <form action="" method="" id="popupform">
+            <button onclick="myfunction()" type="button" id="fontas"><i class="fas fa-times"></i></button>
+            <p>Add Agency</p>
+            <label for="name">Name</label>
+            <input type="text" id="name" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" required>
+            <label for="address">Address</label>
+            <input type="text" id="address" required>
+            <label for="country">Country</label>
+            <input type="text" id="country" required>
+            <div class="cont">
+                <button onclick="myfunction()" class="addagencybtn" id="cancel">Cancel</button>
+                <button type="submit" class="addagencybtn" id="save">Save</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div id="container7" class="containers2">
+        <form action="" method="" id="popupform1" >
+            <button onclick="myfunction1()" type="button" id="fontas"><i class="fas fa-times"></i></button>
+            <p>Update User Information</p>
+            <label for="name">Name</label>
+            <input type="text" id="name1" required>
+            <label for="email">Email</label>
+            <input type="email" id="email1" required>
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone1" required>
+            <label for="address">Address</label>
+            <input type="text" id="address1" required>
+            <label for="country">Country</label>
+            <input type="text" id="country1"required>
+            <div class="cont">
+                <button onclick="myfunction1()" type="button" class="addagencybtn" id="cancel1">Cancel</button>
+                <button type="submit" class="addagencybtn" id="update">Update</button>
+            </div>
+        </form>
     </div>
 
     <script src="script.js"></script>
