@@ -6,10 +6,41 @@ const container7 = document.getElementById('container7');
 const popupform  = document.getElementById('popupform');
 const popupform1 = document.getElementById('popupform1');
 const mainmain = document.getElementById('mainmain');
+const user = document.getElementById('user');
+const logoutbtn = document.getElementById('logoutbtn');
 
 const keys = [];
 const obj = [];
-let clicked;
+let clicked, curruser;
+
+
+//Session Management
+function sessionmanage(){
+    let flag = 0;
+    let session = [];
+    if(localStorage.getItem("session") === null){
+        session = [];
+    }else{
+        session = JSON.parse(localStorage.getItem('session'));
+    }
+
+    session.forEach( function(item) {
+        if(item.loggedin == 1){
+            curruser = item.name;
+            flag = 1;
+            // return;
+        }
+    });
+
+    if(flag == 0){
+        location.href = 'http://127.0.0.1:5502/login.html';
+    }
+
+    user.innerHTML = `<i class="fas fa-user"></i> <p>${curruser}</p>`;
+}
+
+sessionmanage();
+
 
 //Fetching records from API
 async function fetching(){
@@ -53,7 +84,7 @@ async function fetching(){
             table.appendChild(tr);
         })
     }catch(e){
-        console.log(e);
+        // console.log(e);
     }
 }
 fetching();
@@ -66,6 +97,7 @@ function myfunc(){
 }
 
 
+// Popping up User Update Form
 function editRow(row) {
     clicked = row.id;
 
@@ -109,6 +141,8 @@ function editRow(row) {
 
 
 //Hiding the add agency form
+
+
 function myfunction(){
     container6.style.display = 'none';
     mainmain.style.opacity = '1';
@@ -122,7 +156,7 @@ function myfunction1(){
 }
 
 
-//Adding/Storing a record to the API
+// Adding/Storing a record to the API
 popupform.addEventListener("submit", saveindb);
 
 async function saveindb(e){
@@ -153,6 +187,9 @@ async function saveindb(e){
     email.value = "";
     phone.value = "";
     country.value = "";
+    container6.style.display = 'none';
+    mainmain.style.opacity = "1";
+    location.reload();
 }   
 
 
@@ -185,5 +222,28 @@ async function updateindb(e){
     }).then(res => res.json()).then(data => console.log(data));
     container7.style.display = 'none';
     mainmain.style.opacity = "1";
+    location.reload();
 }
 
+
+// Logging out an  User
+logoutbtn.addEventListener("click", logout);
+
+function logout(){
+    let session = [];
+    if(localStorage.getItem("session") === null){
+        session = [];
+    }else{
+        session = JSON.parse(localStorage.getItem('session'));
+    }
+
+    session.forEach( function(item) {
+        if(item.loggedin == 1){
+            item.loggedin = 0;
+            return;
+        }
+    });
+
+    localStorage.setItem("session", JSON.stringify(session));
+    location.href = 'http://127.0.0.1:5502/login.html';
+}
