@@ -8,10 +8,14 @@ const popupform1 = document.getElementById('popupform1');
 const mainmain = document.getElementById('mainmain');
 const user = document.getElementById('user');
 const logoutbtn = document.getElementById('logoutbtn');
+const currpage = document.getElementById('currpage');
+const previous = document.getElementById('previous');
+const next = document.getElementById('next');
 
-const keys = [];
-const obj = [];
-let clicked, curruser;
+const entries = [];
+// const keys = [];
+// const obj = [];
+let clicked, curruser, currpagecnt = 1;
 
 
 //Session Management
@@ -47,47 +51,226 @@ async function fetching(){
     try{
         const url = await fetch("https://api.airtable.com/v0/appyEg2T3hHOc2gAN/Table%201?&view=Grid%20view", {headers: {"Authorization": "Bearer keynhmixDus3wfxoL"}});
         const data = await url.json();
-        // console.log(data);
-        let cnt = 1;
+        // let cnt = 1;
         data.records.forEach((item) => { 
-            keys.push(item.id);
+            // const tr = document.createElement('tr');
+            // const td1 = document.createElement('td');
+            // td1.innerText = cnt;
+            // tr.appendChild(td1);
+            // cnt +=  1;
 
-            const tr = document.createElement('tr');
-            const td1 = document.createElement('td');
-            td1.innerText = cnt;
-            tr.appendChild(td1);
-            cnt +=  1;
-
-            obj.push({"phone": item.fields.Phone, "email": item.fields.Email});
-
-            const td2 = document.createElement('td');
-            td2.innerText = item.fields.Name;
-            tr.appendChild(td2);
+            // const td2 = document.createElement('td');
+            // td2.innerText = item.fields.Name;
+            // tr.appendChild(td2);
             
-            const td3 = document.createElement('td');
-            td3.innerText = item.fields.Address;
-            tr.appendChild(td3);
+            // const td3 = document.createElement('td');
+            // td3.innerText = item.fields.Address;
+            // tr.appendChild(td3);
             
-            const td4 = document.createElement('td');
-            td4.innerText = item.fields.Country;
-            tr.appendChild(td4);
+            // const td4 = document.createElement('td');
+            // td4.innerText = item.fields.Country;
+            // tr.appendChild(td4);
 
-            const td5 = document.createElement('td');
-            const td6 = document.createElement('button');
-            td6.setAttribute('class', 'btn');
-            td6.onclick = function() {editRow(item);};
-            // td6.setAttribute('onclick', `editRow(${item})`)
-            td6.innerText = "Edit";
-            td5.appendChild(td6);
-            tr.appendChild(td5);
+            // const td5 = document.createElement('td');
+            // const td6 = document.createElement('button');
+            // td6.setAttribute('class', 'btn');
+            // td6.onclick = function() {editRow(item);};
+            // td6.innerText = "Edit";
+            // td5.appendChild(td6);
+            // tr.appendChild(td5);
 
-            table.appendChild(tr);
+            // table.appendChild(tr);
+
+            const single = {
+                'id': item.id,
+                'name': item.fields.Name,
+                'address': item.fields.Address,
+                'country': item.fields.Country,
+                'phone': item.fields.Phone,
+                'email': item.fields.Email
+            }
+
+            entries.push(single);
         })
     }catch(e){
-        // console.log(e);
+        console.log(e);
+    }
+
+    if(currpagecnt == 1){
+        previous.disabled = true;
+        previous.style.opacity = "0.7";
+    }
+    if(currpagecnt != 1){
+        previous.disabled = false;
+        previous.style.opacity = "1";
+    }
+    if(currpagecnt != Math.floor(entries.length/7)){
+        next.disabled = false;
+        next.style.opacity = "1";
+    }
+    if(currpagecnt == Math.floor(entries.length/7)){
+        next.disabled = true;
+        next.style.opacity = "0.7"; 
+    }
+
+    currpage.innerText = currpagecnt;
+    for(let j = currpagecnt-1; j < currpagecnt * 7; j++){
+        const tr = document.createElement('tr');
+        const td1 = document.createElement('td');
+        td1.innerText = j+1;
+        tr.appendChild(td1);
+
+        const td2 = document.createElement('td');
+        td2.innerText = entries[j].name;
+        tr.appendChild(td2);
+
+        const td3 = document.createElement('td');
+        td3.innerText = entries[j].address;
+        tr.appendChild(td3);
+
+        const td4 = document.createElement('td');
+        td4.innerText = entries[j].country;
+        tr.appendChild(td4);
+
+        const td5 = document.createElement('td');
+        const td6 = document.createElement('button');
+        td6.setAttribute('class', 'btn');
+        td6.onclick = function() {editRow(item);};
+
+        td6.innerText = "Edit";
+        td5.appendChild(td6);
+        tr.appendChild(td5);
+
+        table.appendChild(tr);
     }
 }
 fetching();
+
+
+function callnextpage(){
+    currpagecnt++;
+    currpage.innerText = currpagecnt;
+
+    if(currpagecnt == Math.floor(entries.length/7)){
+        next.disabled = true;
+        next.style.opacity = "0.7";
+    }
+    if(currpagecnt != 1){
+        previous.disabled = false;
+        previous.style.opacity = "1";
+    }
+    if(currpagecnt != Math.floor(entries.length/7)){
+        next.disabled = false;
+        next.style.opacity = "1";
+    }
+    if(currpagecnt == 1){
+        previous.disabled = true;
+        previous.style.opacity = "0.7";
+    }
+
+
+    let child = table.childNodes;
+    for (const i of child) {
+        if(i.nodeName === "TR"){
+            i.style.display = 'none';
+        }
+    }
+
+
+    for(let i = (currpagecnt - 1) * 7; i < (currpagecnt * 7); i++){
+        const tr = document.createElement('tr');
+        const td1 = document.createElement('td');
+        td1.innerText = i+1;
+        tr.appendChild(td1);
+
+        const td2 = document.createElement('td');
+        td2.innerText = entries[i].name;
+        tr.appendChild(td2);
+
+        const td3 = document.createElement('td');
+        td3.innerText = entries[i].address;
+        tr.appendChild(td3);
+
+        const td4 = document.createElement('td');
+        td4.innerText = entries[i].country;
+        tr.appendChild(td4);
+
+        const td5 = document.createElement('td');
+        const td6 = document.createElement('button');
+        td6.setAttribute('class', 'btn');
+        td6.onclick = function() {editRow(item);};
+
+        td6.innerText = "Edit";
+        td5.appendChild(td6);
+        tr.appendChild(td5);
+
+        table.appendChild(tr);
+    }
+}
+
+
+function callpreviouspage(){
+    currpagecnt--;
+    currpage.innerText = currpagecnt;
+
+
+    if(currpagecnt == 1){
+        previous.disabled = true;
+        previous.style.opacity = "0.7";
+    }
+    if(currpagecnt != 1){
+        previous.disabled = false;
+        previous.style.opacity = "1";
+    }
+    if(currpagecnt != Math.floor(entries.length/7)){
+        next.disabled = false;
+        next.style.opacity = "1";
+    }
+    if(currpagecnt == Math.floor(entries.length/7)){
+        next.disabled = true;
+        next.style.opacity = "0.7"; 
+    }
+
+
+    let child = table.childNodes;
+    for(const i of child){
+        if(i.nodeName === "TR"){
+            i.style.display = 'none';
+        }
+    }
+
+
+    let cnt = 1;
+    for(let i = (currpagecnt - 1) * 7; i < (currpagecnt * 7); i++){
+        const tr = document.createElement('tr');
+        const td1 = document.createElement('td');
+        td1.innerText = i+1;
+        tr.appendChild(td1);
+
+        const td2 = document.createElement('td');
+        td2.innerText = entries[i].name;
+        tr.appendChild(td2);
+
+        const td3 = document.createElement('td');
+        td3.innerText = entries[i].address;
+        tr.appendChild(td3);
+
+        const td4 = document.createElement('td');
+        td4.innerText = entries[i].country;
+        tr.appendChild(td4);
+
+        const td5 = document.createElement('td');
+        const td6 = document.createElement('button');
+        td6.setAttribute('class', 'btn');
+        td6.onclick = function() {editRow(item);};
+
+        td6.innerText = "Edit";
+        td5.appendChild(td6);
+        tr.appendChild(td5);
+
+        table.appendChild(tr);
+    }
+}
 
 
 //Popping up add agency form

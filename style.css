@@ -474,3 +474,36 @@ td{
     color: #40189D;
     background-color: #EDF2F7;
 }
+
+#pagination{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#previous, #next{
+    width: 80px;
+    height: 40px;
+    border: none;
+    border-radius: 7px;
+    background-color: #40189D;
+    color: white;
+    cursor: pointer;
+    margin: 7px;
+}
+
+#previous:hover, #next:hover{
+    color: #40189D;
+    background-color: #EDF2F7;
+}
+
+#currpage{
+    margin: 10px;
+    height: 15px;
+    width: 15px;
+    border: 1px solid #40189D;
+    border-radius: 7px;
+    text-align: center;
+    padding: 5px;
+}
