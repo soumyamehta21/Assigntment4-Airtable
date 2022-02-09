@@ -237,6 +237,7 @@ input{
     background-color: #EDF2F7;
     cursor: pointer;
     font-size: 18px;
+    order: 2;
 }
 
 
@@ -505,5 +506,22 @@ td{
     border: 1px solid #40189D;
     border-radius: 7px;
     text-align: center;
+    padding: 5px;
+}
+
+
+#external{
+    display: flex;
+    flex-direction: row;
+}
+
+#searchcountry{
+    width: 1089px;
+    height: 35px;
+    margin: 0px 22px;
+    border: 1px solid #40189D;
+    font-size: 18px;
+    outline: none;
+    order: 1;
     padding: 5px;
 }
