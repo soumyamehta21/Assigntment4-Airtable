@@ -16,7 +16,7 @@ const searchcountry = document.getElementById('searchcountry');
 const entries = [];
 // const keys = [];
 // const obj = [];
-let clicked, curruser, currpagecnt = 1;
+let clicked, curruser, currpagecnt = 1, serial = 1;
 
 
 //Session Management
@@ -83,6 +83,7 @@ async function fetching(){
             // table.appendChild(tr);
 
             const single = {
+                'number': serial,
                 'id': item.id,
                 'name': item.fields.Name,
                 'address': item.fields.Address,
@@ -90,7 +91,7 @@ async function fetching(){
                 'phone': item.fields.Phone,
                 'email': item.fields.Email
             }
-
+            serial++;
             entries.push(single);
         })
     }catch(e){
@@ -122,7 +123,7 @@ async function fetching(){
     for(let j = currpagecnt-1; j < currpagecnt * 7 && j < entries.length; j++){
         const tr = document.createElement('tr');
         const td1 = document.createElement('td');
-        td1.innerText = j+1;
+        td1.innerText = entries[j].number;
         tr.appendChild(td1);
 
         const td2 = document.createElement('td');
@@ -327,7 +328,7 @@ function callnextpage(){
     for(let i = (currpagecnt - 1) * 7; i < (currpagecnt * 7) && i < entries.length; i++){
         const tr = document.createElement('tr');
         const td1 = document.createElement('td');
-        td1.innerText = i+1;
+        td1.innerText = entries[i].number;
         tr.appendChild(td1);
 
         const td2 = document.createElement('td');
@@ -396,7 +397,7 @@ function callpreviouspage(){
     for(let i = (currpagecnt - 1) * 7; i < (currpagecnt * 7) && i < entries.length; i++){
         const tr = document.createElement('tr');
         const td1 = document.createElement('td');
-        td1.innerText = i+1;
+        td1.innerText = entries[i].number;
         tr.appendChild(td1);
 
         const td2 = document.createElement('td');
@@ -444,7 +445,7 @@ function search(){
         for(let j = (currpagecnt - 1) * 7; j < (currpagecnt * 7) && j < entries.length; j++){
             const tr = document.createElement('tr');
             const td1 = document.createElement('td');
-            td1.innerText = j+1;
+            td1.innerText = entries[i].number;
             tr.appendChild(td1);
 
             const td2 = document.createElement('td');
@@ -480,7 +481,7 @@ function search(){
                 // console.log(entries[i].country);
                 const tr = document.createElement('tr');
                 const td1 = document.createElement('td');
-                td1.innerText = i+1;
+                td1.innerText = entries[i].number;
                 tr.appendChild(td1);
     
                 const td2 = document.createElement('td');
@@ -535,7 +536,7 @@ function sortbycountry(){
         for(let j = (currpagecnt - 1) * 7; j < (currpagecnt * 7) && j < entries.length; j++){
             const tr = document.createElement('tr');
             const td1 = document.createElement('td');
-            td1.innerText = j+1;
+            td1.innerText = entries[j].number;
             tr.appendChild(td1);
     
             const td2 = document.createElement('td');
@@ -577,7 +578,7 @@ function sortbycountry(){
         for(let j = (currpagecnt - 1) * 7; j < (currpagecnt * 7) && j < entries.length; j++){
             const tr = document.createElement('tr');
             const td1 = document.createElement('td');
-            td1.innerText = j+1;
+            td1.innerText = entries[j].number;
             tr.appendChild(td1);
     
             const td2 = document.createElement('td');
@@ -633,7 +634,7 @@ function sortbycity(){
         for(let j = (currpagecnt - 1) * 7; j < (currpagecnt * 7) && j < entries.length; j++){
             const tr = document.createElement('tr');
             const td1 = document.createElement('td');
-            td1.innerText = j+1;
+            td1.innerText = entries[j].number;
             tr.appendChild(td1);
     
             const td2 = document.createElement('td');
@@ -708,7 +709,7 @@ function sortbycity(){
 
 
 function sortbyname(){
-    const scity = document.getElementById('scity');
+    const sname = document.getElementById('sname');
     
     let child = table.childNodes;
         for(const i of child){
@@ -717,12 +718,12 @@ function sortbyname(){
             }
         }
     
-    if(scity.classList.contains("show1")){
-        scity.innerHTML = `<i class="fas fa-arrow-down"></i>`
+    if(sname.classList.contains("show2")){
+        sname.innerHTML = `<i class="fas fa-arrow-down"></i>`
 
         entries.sort((a,b) => {
-            if(a.address > b.address) return 1;
-            else if(a.address < b.address) return -1;
+            if(a.name > b.name) return 1;
+            else if(a.name < b.name) return -1;
             else return 0;
         })
     
@@ -730,7 +731,7 @@ function sortbyname(){
         for(let j = (currpagecnt - 1) * 7; j < (currpagecnt * 7) && j < entries.length; j++){
             const tr = document.createElement('tr');
             const td1 = document.createElement('td');
-            td1.innerText = j+1;
+            td1.innerText = entries[j].number;
             tr.appendChild(td1);
     
             const td2 = document.createElement('td');
@@ -757,14 +758,14 @@ function sortbyname(){
             table.appendChild(tr);
         }
 
-        scity.classList.remove("show1");
+        sname.classList.remove("show2");
     }
     else{
-        scity.innerHTML = `<i class="fas fa-arrow-up"></i>`
+        sname.innerHTML = `<i class="fas fa-arrow-up"></i>`
 
         entries.sort((a,b) => {
-            if(a.address > b.address) return -1;
-            else if(a.address < b.address) return 1;
+            if(a.name > b.name) return -1;
+            else if(a.name < b.name) return 1;
             else return 0;
         })
     
@@ -772,7 +773,7 @@ function sortbyname(){
         for(let j = (currpagecnt - 1) * 7; j < (currpagecnt * 7) && j < entries.length; j++){
             const tr = document.createElement('tr');
             const td1 = document.createElement('td');
-            td1.innerText = j+1;
+            td1.innerText = entries[j].number;
             tr.appendChild(td1);
     
             const td2 = document.createElement('td');
@@ -799,7 +800,7 @@ function sortbyname(){
             table.appendChild(tr);
         }
 
-        scity.classList.add("show1");
+        sname.classList.add("show2");
     }   
 }
 
