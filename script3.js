@@ -35,9 +35,10 @@ function check(e){
         password.value = "";
     }
     else if(eml == 0 && match == 0){
-        alert("Your Account Does Not Exist!");
+        alert("Your Account Does Not Exist! Please Make A New One");
         email.value = "";
         password.value = "";
+        location.href = 'https://soumyamehta21.github.io/Assigntment4-Airtable/signup.html';
     }
     else if(eml === 1 && pass === 1 && match === 1){
         location.href = 'https://soumyamehta21.github.io/Assigntment4-Airtable/dashboard.html';
