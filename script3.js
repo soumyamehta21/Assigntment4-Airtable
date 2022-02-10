@@ -40,6 +40,6 @@ function check(e){
         password.value = "";
     }
     else if(eml === 1 && pass === 1 && match === 1){
-        location.href = 'http://127.0.0.1:5502/dashboard.html';
+        location.href = 'https://soumyamehta21.github.io/Assigntment4-Airtable/dashboard.html';
     }
 }

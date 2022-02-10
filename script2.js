@@ -41,7 +41,7 @@ function saveinlocal(e){
     else{
         session.push(credential);
         localStorage.setItem("session", JSON.stringify(session));
-        location.href = 'http://127.0.0.1:5502/login.html';
+        location.href = 'https://soumyamehta21.github.io/Assigntment4-Airtable/login.html';
     }
 }
 

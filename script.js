@@ -38,7 +38,7 @@ function sessionmanage(){
     });
 
     if(flag == 0){
-        location.href = 'http://127.0.0.1:5502/login.html';
+        location.href = 'https://soumyamehta21.github.io/Assigntment4-Airtable/login.html';
     }
 
     user.innerHTML = `<i class="fas fa-user"></i> <p>${curruser}</p>`;
@@ -824,5 +824,5 @@ function logout(){
     });
 
     localStorage.setItem("session", JSON.stringify(session));
-    location.href = 'http://127.0.0.1:5502/login.html';
+    location.href = 'https://soumyamehta21.github.io/Assigntment4-Airtable/login.html';
 }
