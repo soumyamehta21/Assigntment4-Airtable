@@ -445,7 +445,7 @@ function search(){
         for(let j = (currpagecnt - 1) * 7; j < (currpagecnt * 7) && j < entries.length; j++){
             const tr = document.createElement('tr');
             const td1 = document.createElement('td');
-            td1.innerText = entries[i].number;
+            td1.innerText = entries[j].number;
             tr.appendChild(td1);
 
             const td2 = document.createElement('td');
