@@ -12,6 +12,8 @@ const currpage = document.getElementById('currpage');
 const previous = document.getElementById('previous');
 const next = document.getElementById('next');
 const searchcountry = document.getElementById('searchcountry');
+const container8 = document.getElementById('container8');
+const adminupdateform = document.getElementById('adminupdateform');
 
 const entries = [];
 // const keys = [];
@@ -38,13 +40,81 @@ function sessionmanage(){
     });
 
     if(flag == 0){
-        location.href = 'https://soumyamehta21.github.io/Assigntment4-Airtable/login.html';
+        location.href = 'http://127.0.0.1:5502/login.html';
     }
 
     user.innerHTML = `<i class="fas fa-user"></i> <p>${curruser}</p>`;
 }
 
 sessionmanage();
+
+
+// Getting details of an admin from localstorage
+function updateuser(){
+    const name = document.getElementById('name5');
+    const email = document.getElementById('email5');
+    const password = document.getElementById('password5');
+    const phone = document.getElementById('phone5');
+    const address = document.getElementById('address5');
+    const country = document.getElementById('country5'); 
+
+    let session = [];
+    if(localStorage.getItem("session") === null){
+        session = [];
+    }else{
+        session = JSON.parse(localStorage.getItem('session'));
+    }
+
+    mainmain.style.opacity = '0.7';
+    container8.style.display = 'flex';
+
+    session.forEach((item) => {
+        if(item.loggedin === 1){
+            name.value = item.name;
+            email.value = item.em;
+            password.value = item.ps;
+            phone.value = item.phone;
+            address.value = item.address;
+            country.value = item.country;
+        }
+    })
+}
+
+
+// Updating details of admin in localStorage
+adminupdateform.addEventListener("submit", updateinlocalstorage);
+
+function updateinlocalstorage(){
+    const name = document.getElementById('name5');
+    const email = document.getElementById('email5');
+    const password = document.getElementById('password5');
+    const phone = document.getElementById('phone5');
+    const address = document.getElementById('address5');
+    const country = document.getElementById('country5');
+
+    let session = [];
+    if(localStorage.getItem("session") === null){
+        session = [];
+    }else{
+        session = JSON.parse(localStorage.getItem('session'));
+    }
+
+    session.forEach((item) => {
+        if(item.loggedin === 1){
+            item.name = name.value;
+            item.em = email.value;
+            item.ps = password.value;
+            item.phone = phone.value;
+            item.address = address.value;
+            item.country = country.value;
+        }
+    })
+
+    localStorage.setItem("session", JSON.stringify(session));
+
+    container8.style.display = 'none';
+    mainmain.style.opacity = "1";
+}
 
 
 //Fetching records from API
@@ -54,34 +124,6 @@ async function fetching(){
         const data = await url.json();
         // let cnt = 1;
         data.records.forEach((item) => { 
-            // const tr = document.createElement('tr');
-            // const td1 = document.createElement('td');
-            // td1.innerText = cnt;
-            // tr.appendChild(td1);
-            // cnt +=  1;
-
-            // const td2 = document.createElement('td');
-            // td2.innerText = item.fields.Name;
-            // tr.appendChild(td2);
-            
-            // const td3 = document.createElement('td');
-            // td3.innerText = item.fields.Address;
-            // tr.appendChild(td3);
-            
-            // const td4 = document.createElement('td');
-            // td4.innerText = item.fields.Country;
-            // tr.appendChild(td4);
-
-            // const td5 = document.createElement('td');
-            // const td6 = document.createElement('button');
-            // td6.setAttribute('class', 'btn');
-            // td6.onclick = function() {editRow(item);};
-            // td6.innerText = "Edit";
-            // td5.appendChild(td6);
-            // tr.appendChild(td5);
-
-            // table.appendChild(tr);
-
             const single = {
                 'number': serial,
                 'id': item.id,
@@ -216,6 +258,11 @@ function myfunction(){
 //Hiding the user upadte form
 function myfunction1(){
     container7.style.display = 'none';
+    mainmain.style.opacity = '1';
+}
+
+function myfunction2(){
+    container8.style.display = 'none';
     mainmain.style.opacity = '1';
 }
 
@@ -805,6 +852,103 @@ function sortbyname(){
 }
 
 
+function sortbyno(){
+    const sno = document.getElementById('sno');
+    
+    let child = table.childNodes;
+        for(const i of child){
+            if(i.nodeName === "TR"){
+                i.style.display = 'none';
+            }
+        }
+    
+    if(sno.classList.contains("show3")){
+        sno.innerHTML = `<i class="fas fa-arrow-down"></i>`
+
+        entries.sort((a,b) => {
+            if(Number(a.number) > Number(b.number)) return 1;
+            else if(Number(a.number) < Number(b.number)) return -1;
+            else return 0;
+        })
+    
+        currpagecnt = currpage.innerText;
+        for(let j = (currpagecnt - 1) * 7; j < (currpagecnt * 7) && j < entries.length; j++){
+            const tr = document.createElement('tr');
+            const td1 = document.createElement('td');
+            td1.innerText = entries[j].number;
+            tr.appendChild(td1);
+    
+            const td2 = document.createElement('td');
+            td2.innerText = entries[j].name;
+            tr.appendChild(td2);
+    
+            const td3 = document.createElement('td');
+            td3.innerText = entries[j].address;
+            tr.appendChild(td3);
+    
+            const td4 = document.createElement('td');
+            td4.innerText = entries[j].country;
+            tr.appendChild(td4);
+    
+            const td5 = document.createElement('td');
+            const td6 = document.createElement('button');
+            td6.setAttribute('class', 'btn');
+            // td6.onclick = function() {editRow(item);};
+    
+            td6.innerText = "Edit";
+            td5.appendChild(td6);
+            tr.appendChild(td5);
+    
+            table.appendChild(tr);
+        }
+
+        sno.classList.remove("show3");
+    }
+    else{
+        sno.innerHTML = `<i class="fas fa-arrow-up"></i>`
+
+        entries.sort((a,b) => {
+            if(Number(a.number) > Number(b.number)) return -1;
+            else if(Number(a.number) < Number(b.number)) return 1;
+            else return 0;
+        })
+    
+        currpagecnt = currpage.innerText;
+        for(let j = (currpagecnt - 1) * 7; j < (currpagecnt * 7) && j < entries.length; j++){
+            const tr = document.createElement('tr');
+            const td1 = document.createElement('td');
+            td1.innerText = entries[j].number;
+            tr.appendChild(td1);
+    
+            const td2 = document.createElement('td');
+            td2.innerText = entries[j].name;
+            tr.appendChild(td2);
+    
+            const td3 = document.createElement('td');
+            td3.innerText = entries[j].address;
+            tr.appendChild(td3);
+    
+            const td4 = document.createElement('td');
+            td4.innerText = entries[j].country;
+            tr.appendChild(td4);
+    
+            const td5 = document.createElement('td');
+            const td6 = document.createElement('button');
+            td6.setAttribute('class', 'btn');
+            // td6.onclick = function() {editRow(item);};
+    
+            td6.innerText = "Edit";
+            td5.appendChild(td6);
+            tr.appendChild(td5);
+    
+            table.appendChild(tr);
+        }
+
+        sno.classList.add("show3");
+    }   
+}
+
+
 // Logging out an  User
 logoutbtn.addEventListener("click", logout);
 
@@ -824,5 +968,5 @@ function logout(){
     });
 
     localStorage.setItem("session", JSON.stringify(session));
-    location.href = 'https://soumyamehta21.github.io/Assigntment4-Airtable/login.html';
+    location.href = 'http://127.0.0.1:5502/login.html';
 }

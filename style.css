@@ -209,6 +209,7 @@ input{
     margin: 17px 17px;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 #user i{
@@ -325,7 +326,7 @@ td{
     border-bottom: 1px solid black;
 }
 
-#fontas{
+.fontas{
     align-self: flex-end;
     margin: 15px;
     border: none;
@@ -382,6 +383,18 @@ td{
     background-color: white;
 }
 
+#container8{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
 #container7{
     position: absolute;
     top: 50%;
@@ -394,6 +407,16 @@ td{
     background-color: white;
 }
 
+#adminupdateform{
+    width: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 15px;
+    box-shadow: 0px 0px 18px 8px #888888;
+}
+
 #popupform1{
     width: 450px;
     display: flex;
@@ -404,8 +427,19 @@ td{
     box-shadow: 0px 0px 18px 8px #888888;
 }
 
+#adminupdateform label{
+    margin: 10px;
+}
+
 #popupform1 label{
     margin: 10px;
+}
+
+#adminupdateform input{
+    font-size: 16px;
+    padding: 5px;
+    margin: 5px;
+    height: 30px;
 }
 
 #popupform1 input{
@@ -413,6 +447,14 @@ td{
     padding: 5px;
     margin: 5px;
     height: 30px;
+}
+
+#adminupdateform p{
+    align-self: flex-start;
+    margin: 15px auto;
+    font-size: 25px;
+    font-weight: bold;
+    border-bottom: 1px solid black;
 }
 
 #popupform1 p{
@@ -423,24 +465,24 @@ td{
     border-bottom: 1px solid black;
 }
 
-#update{
+.update{
     align-self: flex-end;
     color: white;
     background-color: #40189D;
     cursor: pointer;
 }
 
-#update:hover{
+.update:hover{
     color: #40189D;
     background-color: white;
 }
 
-#cancel1{
+.cancel1{
     cursor: pointer;
     background-color: #EDF2F7;
 }
 
-#cancel1:hover{
+.cancel1:hover{
     background-color: white;
 }
 

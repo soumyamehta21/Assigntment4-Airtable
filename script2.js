@@ -10,6 +10,9 @@ function saveinlocal(e){
     const email = document.getElementById('email2');
     const password = document.getElementById('password2');
     const name = document.getElementById('name2');
+    const phone = document.getElementById('phone2');
+    const address = document.getElementById('address2');
+    const country = document.getElementById('country2');
     let emil = 0;
 
     let session = [], flag1 = 0;
@@ -23,8 +26,11 @@ function saveinlocal(e){
     let credential = {
         'em': email.value,
         'ps': password.value,
-        'loggedin': 0,
-        'name': name.value
+        'name': name.value,
+        'phone': phone.value,
+        'address': address.value,
+        'country': country.value,
+        'loggedin': 0
     }
 
     session.forEach(function(item){
@@ -41,7 +47,7 @@ function saveinlocal(e){
     else{
         session.push(credential);
         localStorage.setItem("session", JSON.stringify(session));
-        location.href = 'https://soumyamehta21.github.io/Assigntment4-Airtable/login.html';
+        location.href = 'http://127.0.0.1:5502/login.html';
     }
 }
 
