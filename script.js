@@ -14,11 +14,18 @@ const next = document.getElementById('next');
 const searchcountry = document.getElementById('searchcountry');
 const container8 = document.getElementById('container8');
 const adminupdateform = document.getElementById('adminupdateform');
+const loader = document.getElementById('loader');
 
 const entries = [];
 // const keys = [];
 // const obj = [];
 let clicked, curruser, currpagecnt = 1, serial = 1;
+
+
+loader.style.display = 'block';
+previous.style.display = 'none';
+next.style.display = 'none';
+currpage.style.display = 'none';
 
 
 //Session Management
@@ -40,7 +47,7 @@ function sessionmanage(){
     });
 
     if(flag == 0){
-        location.href = 'http://127.0.0.1:5502/login.html';
+        location.href = 'https://soumyamehta21.github.io/Assigntment4-Airtable/login.html';
     }
 
     user.innerHTML = `<i class="fas fa-user"></i> <p>${curruser}</p>`;
@@ -139,6 +146,15 @@ async function fetching(){
     }catch(e){
         console.log(e);
     }
+
+    //hiding the loader 
+    if(entries.length >= 1){
+        loader.style.display = 'none';
+        previous.style.display = 'block';
+        next.style.display = 'block';
+        currpage.style.display = 'block';
+    }
+
 
     if(currpagecnt == 1){
         previous.disabled = true;
@@ -968,5 +984,5 @@ function logout(){
     });
 
     localStorage.setItem("session", JSON.stringify(session));
-    location.href = 'http://127.0.0.1:5502/login.html';
+    location.href = 'https://soumyamehta21.github.io/Assigntment4-Airtable/login.html';
 }
